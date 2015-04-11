@@ -17,3 +17,6 @@ Comparison of Two Lightweight Processing Techniques: gevent vs goroutine
 ## test
 ### ab
 `ab -n 1000 -c 10 http://localhost:8080/abtest`
+
+## reference
+* [profiling go programs] (http://blog.golang.org/profiling-go-programs)
