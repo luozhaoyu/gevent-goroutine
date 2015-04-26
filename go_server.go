@@ -5,8 +5,9 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	//	"strconv"
 	"sync"
-	//	"time"
+	"time"
 )
 
 import _ "net/http/pprof"
@@ -51,6 +52,11 @@ func contention_handler(w http.ResponseWriter, r *http.Request) {
 	}
 	if v.Get("lock") == "0" {
 		enable_lock = false
+	}
+	if v.Get("sleep") != "0" {
+		sleep_duration, _ := time.ParseDuration(v.Get("sleep"))
+		time.Sleep(sleep_duration)
+		return
 	}
 	data := []byte{1}
 	write(data)

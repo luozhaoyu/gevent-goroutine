@@ -20,6 +20,7 @@ Comparison of Two Lightweight Processing Techniques: gevent vs goroutine
 * normal echo with command line output (default is disabled): `ab -n 1000 -c 10 'http://localhost:8080/?print=1'`
 * contention with lock (default is enabled): `ab -n 1000 -c 10 'http://localhost:8080/contention'`
 * contention without lock (default is enabled): `ab -n 1000 -c 10 'http://localhost:8080/contention?lock=0'`
+* maximum spawn: `ab -n 10000000 -c 1000000 'http://localhost:8080/contention?sleep=20s'`
 
 ## profile
 ### go
