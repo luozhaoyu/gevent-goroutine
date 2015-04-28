@@ -5,7 +5,9 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
-	//	"strconv"
+	"os"
+	"runtime"
+	"strconv"
 	"sync"
 	"time"
 )
@@ -26,7 +28,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "You are visiting: %s", r.URL.Path)
 }
 
-func total_handler(w http.ResponseWriter, r *http.Request) {
+func channel_handler(w http.ResponseWriter, r *http.Request) {
 	v := r.URL.Query()
 	d := <-statistic
 	d++
@@ -81,6 +83,11 @@ func contention_handler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	var procs int = 1
+	if len(os.Args) > 1 {
+		procs, _ = strconv.Atoi(os.Args[1])
+	}
+	runtime.GOMAXPROCS(procs)
 	go func() {
 		log.Println(http.ListenAndServe("localhost:6060", nil))
 	}()
@@ -89,7 +96,7 @@ func main() {
 		statistic <- 0
 	}()
 	http.HandleFunc("/", handler)
-	http.HandleFunc("/total", total_handler)
+	http.HandleFunc("/channel", channel_handler)
 	http.HandleFunc("/contention", contention_handler)
 	fmt.Printf("Listening at 8080, debug at 6060\n")
 	http.ListenAndServe(":8080", nil)
