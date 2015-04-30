@@ -22,4 +22,4 @@ def application(env, start_response):
      
 if __name__ == '__main__':
     print('Serving on 8088...')
-    WSGIServer(('localhost', 8088), application).serve_forever()
+    WSGIServer(('', 8088), application).serve_forever()
