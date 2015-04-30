@@ -13,7 +13,8 @@ Comparison of Two Lightweight Processing Techniques: gevent vs goroutine
 - `w3m http://localhost:8080/contention?lock=0&print=1`
 
 ### gevent
-
+* python gevent_echo.py
+* python gevent_counter.py
 ## test
 ### ab
 * normal echo: `ab -n 1000 -c 10 'http://localhost:8080/'`
